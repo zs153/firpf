@@ -2,7 +2,6 @@ import { createPrivateKey, createSecretKey, generateKeyPairSync } from 'crypto'
 import bcrypt from "bcrypt";
 import { V4 } from 'paseto'
 import { privateKey, secreto } from '../config/settings'
-import { tiposMovimiento } from '../public/js/enumeraciones'
 import * as DAL from "../models/autoriza.model";
 
 // pages
@@ -111,6 +110,9 @@ export const olvido = async (req, res) => {
   const randomString = Math.random().toString(36).substring(2, 10);
   const salt = await bcrypt.genSalt(10);
   const passHash = await bcrypt.hash(randomString, salt);
+  const tiposMovimiento = {
+    olvidoPassword: 61,
+  }
   const usuario = {
     emausu: req.body.emausu,
     pwdusu: passHash,
