@@ -24,7 +24,7 @@ export const forgot = async (context) => {
 
     result = context;
   } catch (error) {
-    result = null;
+    throw (error)
   }
 
   return result;
