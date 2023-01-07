@@ -136,7 +136,15 @@ export const olvido = async (req, res) => {
       throw new Error()
     }
   } catch (error) {
-    const msg = "No se ha podido generar una nueva contraseña";
+    let msg
+
+    if (error.errorNum === 20001) {
+      msg = 'No se puede enviar el correo electrónico'
+    } else if (error.errorNum === 20100) {
+      msg = 'El correo electrónico no existe'
+    } else {
+      msg = 'No se han podido actualizar los datos'
+    }
 
     res.render("sign-in", {
       datos: req.body,
