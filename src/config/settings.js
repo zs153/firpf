@@ -12,5 +12,6 @@ export const dbPool = {
 }
 export const puerto = process.env.PORT;
 export const secreto = process.env.SECRETO
+export const serverWEB = process.env.SERVER_WEB
 export const publicKey = process.env.PUBLIC_KEY
 export const privateKey = process.env.PRIVATE_KEY

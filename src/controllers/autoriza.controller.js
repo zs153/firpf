@@ -1,7 +1,7 @@
 import { createPrivateKey, createSecretKey, generateKeyPairSync } from 'crypto'
 import bcrypt from "bcrypt";
 import { V4 } from 'paseto'
-import { privateKey, secreto } from '../config/settings'
+import { privateKey, secreto, serverWEB } from '../config/settings'
 import * as DAL from "../models/autoriza.model";
 
 // pages
@@ -57,7 +57,6 @@ export const autorizar = async (req, res) => {
           //     passphrase: secreto,
           //   },
           // })
-
           const key = createPrivateKey({
             'key': privateKey,
             'format': 'pem',
@@ -69,8 +68,7 @@ export const autorizar = async (req, res) => {
             audience: 'urn:client:claim',
             issuer: 'http://localhost:4000',
             expiresIn: '6 hours',
-          }).then(r => {
-            const token = r
+          }).then(token => {
             const options = {
               path: "/",
               sameSite: true,
@@ -79,7 +77,7 @@ export const autorizar = async (req, res) => {
             };
             res.cookie('auth', token, options)
             res.writeHead(302, {
-              'Location': 'http://localhost:4000/admin',
+              'Location': `http://${serverWEB}:4000/admin`,
               'Content-Type': 'text/plain',
             })
             res.end()
@@ -132,7 +130,6 @@ export const olvido = async (req, res) => {
       alerts: undefined,
     });
   } catch (error) {
-    console.log(error)
     let msg
 
     if (error.errorNum === 20100) {
