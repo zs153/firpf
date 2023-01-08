@@ -140,7 +140,7 @@ export const olvido = async (req, res) => {
     } else if (error.errorNum === 20101) {
       msg = 'No se puede enviar el correo electrónico'
     } else if (error.errorNum === 20102) {
-      msg = 'No se puede actualizar los datos'
+      msg = 'No se pueden actualizar los datos'
     }
 
     res.render("sign-in", {
