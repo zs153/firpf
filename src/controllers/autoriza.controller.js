@@ -1,4 +1,4 @@
-import { createPrivateKey, createSecretKey, generateKeyPairSync } from 'crypto'
+import { createPrivateKey } from 'crypto'
 import bcrypt from "bcrypt";
 import { V4 } from 'paseto'
 import { privateKey, secreto, serverWEB } from '../config/settings'
@@ -66,7 +66,7 @@ export const autorizar = async (req, res) => {
           })
           await V4.sign(payload, key, {
             audience: 'urn:client:claim',
-            issuer: 'http://localhost:4000',
+            issuer: 'http://localhost:4600',
             expiresIn: '6 hours',
           }).then(token => {
             const options = {
@@ -77,7 +77,7 @@ export const autorizar = async (req, res) => {
             };
             res.cookie('auth', token, options)
             res.writeHead(302, {
-              'Location': `http://${serverWEB}:4000/admin`,
+              'Location': `http://${serverWEB}:4600/admin`,
               'Content-Type': 'text/plain',
             })
             res.end()
