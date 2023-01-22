@@ -3,7 +3,7 @@ import { simpleExecute } from "../services/database.js";
 const baseQuery = `SELECT idusua, userid, rolusu, ofiusu, pwdusu FROM usuarios
 WHERE userid = :userid
 `
-const olvidoSql = `BEGIN FORMULARIOS_PKG.FORGOTPASSWORD(
+const olvidoSql = `BEGIN OPORRAK_PKG.FORGOTPASSWORD(
   :emausu,
   :pwdusu, 
   :tipmov,
