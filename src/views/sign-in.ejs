@@ -9,8 +9,6 @@
   <link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
   <!-- styles -->
   <link rel="stylesheet" href="/css/styles.css">
-  <!-- <link rel="stylesheet" href="/css/estilos.css">
-    <link rel="stylesheet" href="/css/navbar.css"> -->
 </head>
 
 <body class="antialiased border-top-wide border-primary d-flex flex-column">
@@ -27,6 +25,7 @@
       <% }) %>
       <% } %>
       <form class="card card-md" action="/auth/auth" method="POST">
+        <input type="hidden" name="url" value="<%- datos.url %>">
         <div class="card-body">
           <h2 class="card-title text-center mb-4">Iniciar sesión</h2>
           <div class="mb-3">

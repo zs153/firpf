@@ -6,7 +6,14 @@ import * as DAL from "../models/autoriza.model";
 
 // pages
 export const loginPage = async (req, res) => {
-  res.render("sign-in", { datos: {}, alerts: undefined });
+  const datos = {
+    url: req.query.valid
+  }
+
+  res.render("sign-in", {
+    datos,
+    alerts: undefined,
+  });
 };
 export const olvidoPage = async (req, res) => {
   res.render("forgot", { datos: {}, alerts: undefined });
@@ -15,8 +22,9 @@ export const olvidoPage = async (req, res) => {
 // procs
 export const autorizar = async (req, res) => {
   const context = {
-    userid: req.body.userid,
+    USERID: req.body.userid,
   }
+  const url = req.body.url
 
   try {
     const rows = await DAL.find(context);
@@ -77,7 +85,7 @@ export const autorizar = async (req, res) => {
             };
             res.cookie('auth', token, options)
             res.writeHead(302, {
-              'Location': `http://${serverWEB}:4600/admin`,
+              'Location': `http://${url}/admin`,
               'Content-Type': 'text/plain',
             })
             res.end()

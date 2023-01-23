@@ -5,6 +5,7 @@ import express from 'express'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import { puerto } from '../config/settings'
+
 // rutas
 import authRouter from "../routes/autoriza.router";
 

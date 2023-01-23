@@ -1,6 +1,7 @@
 import { simpleExecute } from "../services/database.js";
 
-const baseQuery = `SELECT idusua, userid, rolusu, ofiusu, pwdusu FROM usuarios
+const baseQuery = `SELECT 
+  idusua, userid, rolusu, ofiusu, pwdusu FROM usuarios
 WHERE userid = :userid
 `
 const olvidoSql = `BEGIN OPORRAK_PKG.FORGOTPASSWORD(
@@ -18,9 +19,12 @@ export const find = async (context) => {
 }
 export const forgot = async (context) => {
   let result;
+  const binds = {
+    userid: context.USERID,
+  }
 
   try {
-    await simpleExecute(olvidoSql, context);
+    await simpleExecute(olvidoSql, binds);
 
     result = context;
   } catch (error) {
